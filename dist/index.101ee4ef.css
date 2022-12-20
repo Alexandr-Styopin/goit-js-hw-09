@@ -61,6 +61,11 @@ button {
   display: block;
 }
 
+button:hover {
+  letter-spacing: 1px;
+  padding: 10px 22px;
+}
+
 .isDisabled {
   color: #aaa9a9;
   background-color: #7a7a7a;

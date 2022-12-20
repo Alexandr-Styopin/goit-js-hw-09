@@ -72,6 +72,11 @@ button {
   border-radius: 10px;
 }
 
+button:hover {
+  padding: 10px 22px 10px 22px;
+  letter-spacing:1px;
+}
+
 .isDisabled {
   background-color:rgb(122, 122, 122);
   color: #aaa9a9;
