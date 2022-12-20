@@ -573,10 +573,7 @@ function convertMs(ms) {
         minutes,
         seconds
     };
-} // refs.seconds.textContent = seconds;
- // console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
- // console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
- // console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+}
 
 },{"flatpickr":"llQu5","flatpickr/dist/flatpickr.min.css":"eVN6V","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"llQu5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
