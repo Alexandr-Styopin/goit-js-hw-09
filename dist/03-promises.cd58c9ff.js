@@ -555,6 +555,7 @@ refs.form.addEventListener("submit", onFormSubmit);
 function onFormSubmit(evt) {
     evt.preventDefault();
     callCreatePromise.call();
+    evt.target.reset();
 }
 
 },{"notiflix":"5WWYd","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5WWYd":[function(require,module,exports) {

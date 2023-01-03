@@ -21,10 +21,8 @@ function createPromise(position, delay) {
   });
 };
 
-
 const refs = {
-    form: document.querySelector('.form'),
-    
+    form: document.querySelector('.form'), 
 };
 
 const callCreatePromise = {
@@ -79,6 +77,7 @@ refs.form.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(evt) {
     evt.preventDefault();
-  
     callCreatePromise.call();
+    
+    evt.target.reset();
 };

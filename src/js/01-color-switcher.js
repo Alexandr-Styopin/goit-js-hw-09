@@ -33,20 +33,36 @@ class ColorSwitcher {
         clearInterval(this.intervalId);
         this.isActive = false;
     }
+
+    
 };
 
 const colorSwitcher = new ColorSwitcher;
 
+refs.stopBtn.setAttribute('disabled', true);
+refs.stopBtn.classList.add('isDisabled');
+
 refs.startBtn.addEventListener('click', onClickStartBtn);
 
 function onClickStartBtn (evt) {
-    colorSwitcher.start()
+    colorSwitcher.start();
+
+    refs.stopBtn.removeAttribute('disabled');
+    refs.stopBtn.classList.remove('isDisabled');
+
+    refs.startBtn.setAttribute('disabled', true);
+    refs.startBtn.classList.add('isDisabled');
 };
 
 refs.stopBtn.addEventListener('click', onClickStopBtn);
-
 function onClickStopBtn(evt) {
-    colorSwitcher.stop()
+    colorSwitcher.stop();
+
+    refs.startBtn.removeAttribute('disabled');
+    refs.startBtn.classList.remove('isDisabled');
+
+    refs.stopBtn.setAttribute('disabled', true);
+    refs.stopBtn.classList.add('isDisabled');
 };
 
 
