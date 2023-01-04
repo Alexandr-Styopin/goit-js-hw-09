@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 
 
 function createPromise(position, delay) {
-  return promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
 
     const values = {
@@ -78,6 +78,5 @@ refs.form.addEventListener('submit', onFormSubmit);
 function onFormSubmit(evt) {
     evt.preventDefault();
     callCreatePromise.call();
-    
     evt.target.reset();
 };

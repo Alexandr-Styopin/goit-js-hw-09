@@ -507,7 +507,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _notiflix = require("notiflix");
 var _notiflixDefault = parcelHelpers.interopDefault(_notiflix);
 function createPromise(position, delay) {
-    return promise = new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject)=>{
         const shouldResolve = Math.random() > 0.3;
         const values = {
             position: position,
