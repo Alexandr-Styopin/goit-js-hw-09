@@ -511,27 +511,16 @@ function createPromise(position, delay) {
         const shouldResolve = Math.random() > 0.3;
         // console.log("createPromise-ok");
         setTimeout(()=>{
-            if (shouldResolve) {
-                // Fulfill
-                resolve({
-                    position,
-                    delay
-                });
-                console.log("resolve", {
-                    position,
-                    delay
-                });
-            } else {
-                // Reject
-                reject({
-                    position,
-                    delay
-                });
-                console.log("reject ", {
-                    position,
-                    delay
-                });
-            }
+            if (shouldResolve) // Fulfill
+            resolve({
+                position,
+                delay
+            });
+            else // Reject
+            reject({
+                position,
+                delay
+            });
         }, delay);
     });
 }
@@ -545,19 +534,19 @@ class CallCreatePromise {
         const delayValue = Number(formEl.delay.value);
         const stepValue = Number(formEl.step.value);
         const amountValue = Number(formEl.amount.value);
-        let position = null;
-        let delay = delayValue;
+        let position1 = null;
+        let delay1 = delayValue;
         const intervalId = setInterval(()=>{
-            if (position) delay += stepValue;
-            position += 1;
-            createPromise(position, delay).then(()=>{
+            if (position1) delay1 += stepValue;
+            position1 += 1;
+            createPromise(position1, delay1).then(({ position , delay  })=>{
                 console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-            }).catch(()=>{
+            }).catch(({ position , delay  })=>{
                 console.log(`❌ Rejected promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
             });
-            if (position === amountValue) clearTimeout(intervalId);
+            if (position1 === amountValue) clearTimeout(intervalId);
         }, stepValue);
     }
 }

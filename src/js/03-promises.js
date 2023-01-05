@@ -8,13 +8,10 @@ function createPromise(position, delay) {
     setTimeout(() => {
       if (shouldResolve) {
         // Fulfill
-        resolve({ position, delay });
-        console.log("resolve", { position, delay })
-  
+        resolve({ position, delay });  
       } else {
         // Reject
-        reject({ position, delay });
-        console.log("reject ", { position, delay })
+        reject({ position, delay });      
       }
     }, delay);
    
@@ -45,11 +42,11 @@ class CallCreatePromise {
       position += 1;
       
       createPromise(position, delay)
-      .then(() => {
+      .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
-      .catch(() => {
+      .catch(({ position, delay }) => {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
       });
