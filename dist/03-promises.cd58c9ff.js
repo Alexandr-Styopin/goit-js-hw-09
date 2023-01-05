@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"dDjGg":[function(require,module,exports) {
+})({"dLg3Z":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
@@ -509,48 +509,59 @@ var _notiflixDefault = parcelHelpers.interopDefault(_notiflix);
 function createPromise(position, delay) {
     return new Promise((resolve, reject)=>{
         const shouldResolve = Math.random() > 0.3;
-        const values = {
-            position: position,
-            delay: delay
-        };
-        if (shouldResolve) // Fulfill
-        return resolve(values);
-        else // Reject
-        return reject(values);
+        // console.log("createPromise-ok");
+        setTimeout(()=>{
+            if (shouldResolve) {
+                // Fulfill
+                resolve({
+                    position,
+                    delay
+                });
+                console.log("resolve", {
+                    position,
+                    delay
+                });
+            } else {
+                // Reject
+                reject({
+                    position,
+                    delay
+                });
+                console.log("reject ", {
+                    position,
+                    delay
+                });
+            }
+        }, delay);
     });
 }
 const refs = {
     form: document.querySelector(".form")
 };
-const callCreatePromise = {
-    isActive: false,
-    intervalId: null,
-    call () {
-        if (this.isActive) return;
-        this.isActive = true;
+class CallCreatePromise {
+    constuctor() {}
+    call() {
         const formEl = refs.form.elements;
-        const amountInputValue = Number(formEl.amount.value);
-        const delayInputValue = Number(formEl.delay.value);
-        const stepInputValue = Number(formEl.step.value);
-        let position1 = null;
-        let delay1 = delayInputValue;
+        const delayValue = Number(formEl.delay.value);
+        const stepValue = Number(formEl.step.value);
+        const amountValue = Number(formEl.amount.value);
+        let position = null;
+        let delay = delayValue;
         const intervalId = setInterval(()=>{
-            if (position1) delay1 += stepInputValue;
-            position1 += 1;
-            createPromise(position1, delay1).then(({ position , delay  })=>{
+            if (position) delay += stepValue;
+            position += 1;
+            createPromise(position, delay).then(()=>{
                 console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-            }).catch(({ position , delay  })=>{
+            }).catch(()=>{
                 console.log(`❌ Rejected promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
             });
-            if (position1 === amountInputValue) {
-                clearTimeout(intervalId);
-                this.isActive = false;
-            }
-        }, delay1);
+            if (position === amountValue) clearTimeout(intervalId);
+        }, stepValue);
     }
-};
+}
+const callCreatePromise = new CallCreatePromise;
 refs.form.addEventListener("submit", onFormSubmit);
 function onFormSubmit(evt) {
     evt.preventDefault();
@@ -1347,6 +1358,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["dDjGg","8tzFL"], "8tzFL", "parcelRequired7c6")
+},{}]},["dLg3Z","8tzFL"], "8tzFL", "parcelRequired7c6")
 
 //# sourceMappingURL=03-promises.cd58c9ff.js.map

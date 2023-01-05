@@ -4,20 +4,20 @@ import Notiflix from 'notiflix';
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
-
-    const values = {
-      position: position,
-      delay: delay,
-    };
+    // console.log("createPromise-ok");
+    setTimeout(() => {
+      if (shouldResolve) {
+        // Fulfill
+        resolve({ position, delay });
+        console.log("resolve", { position, delay })
   
-    if (shouldResolve) {
-      // Fulfill
-      return resolve(values);
-
-    } else {
-      // Reject
-      return reject(values);
-    }
+      } else {
+        // Reject
+        reject({ position, delay });
+        console.log("reject ", { position, delay })
+      }
+    }, delay);
+   
   });
 };
 
@@ -25,53 +25,46 @@ const refs = {
     form: document.querySelector('.form'), 
 };
 
-const callCreatePromise = {
-  isActive: false,
-  intervalId: null,
+class CallCreatePromise {
+  constuctor() {};
 
   call() {
-
-    if(this.isActive) {
-      return;
-  };
-
-    this.isActive = true;
-
+    
     const formEl = refs.form.elements;
-    const amountInputValue = Number(formEl.amount.value);
-    const delayInputValue = Number(formEl.delay.value);
-    const stepInputValue = Number(formEl.step.value);
+    const delayValue = Number(formEl.delay.value);
+    const stepValue = Number(formEl.step.value);
+    const amountValue = Number(formEl.amount.value);
 
     let position = null;
-    
-    let delay = delayInputValue; 
-        
-    const intervalId = setInterval(() => { 
-        if (position) {
-      delay += stepInputValue;
-    }
+    let delay = delayValue;
 
-    position += 1;
-   
-    createPromise(position, delay)
-    .then(({ position, delay }) => {
-    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+    const intervalId = setInterval(() => {
+      if (position) {
+        delay += stepValue;
+      }
+      position += 1;
+      
+      createPromise(position, delay)
+      .then(() => {
+        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(() => {
+        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
+      });
 
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`)
-  })
-    .catch(({ position, delay }) => {
-    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
-
-      if (position === amountInputValue) {     
-          clearTimeout(intervalId);
-          this.isActive = false;
+      if (position === amountValue) {     
+        clearTimeout(intervalId);
       };
-    },delay);
-  }
+
+    }, stepValue);
+
 };
+
+};
+
+const callCreatePromise = new CallCreatePromise;
 
 refs.form.addEventListener('submit', onFormSubmit);
 

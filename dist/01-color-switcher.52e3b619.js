@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"gzrwE":[function(require,module,exports) {
+})({"bnTUh":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
@@ -550,6 +550,6 @@ function onClickStopBtn(evt) {
     refs.stopBtn.classList.add("isDisabled");
 }
 
-},{}]},["gzrwE","cYUEh"], "cYUEh", "parcelRequired7c6")
+},{}]},["bnTUh","cYUEh"], "cYUEh", "parcelRequired7c6")
 
 //# sourceMappingURL=01-color-switcher.52e3b619.js.map
