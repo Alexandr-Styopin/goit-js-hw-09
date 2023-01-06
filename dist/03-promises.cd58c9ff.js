@@ -534,20 +534,17 @@ class CallCreatePromise {
         const delayValue = Number(formEl.delay.value);
         const stepValue = Number(formEl.step.value);
         const amountValue = Number(formEl.amount.value);
-        let position1 = null;
         let delay1 = delayValue;
-        const intervalId = setInterval(()=>{
-            if (position1) delay1 += stepValue;
-            position1 += 1;
-            createPromise(position1, delay1).then(({ position , delay  })=>{
+        for(let index = 1; index < amountValue; index++){
+            createPromise(index, delay1).then(({ position , delay  })=>{
                 console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
             }).catch(({ position , delay  })=>{
                 console.log(`❌ Rejected promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
             });
-            if (position1 === amountValue) clearTimeout(intervalId);
-        }, stepValue);
+            delay1 += stepValue;
+        }
     }
 }
 const callCreatePromise = new CallCreatePromise;

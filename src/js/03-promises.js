@@ -26,22 +26,15 @@ class CallCreatePromise {
   constuctor() {};
 
   call() {
-    
     const formEl = refs.form.elements;
     const delayValue = Number(formEl.delay.value);
     const stepValue = Number(formEl.step.value);
     const amountValue = Number(formEl.amount.value);
 
-    let position = null;
     let delay = delayValue;
 
-    const intervalId = setInterval(() => {
-      if (position) {
-        delay += stepValue;
-      }
-      position += 1;
-      
-      createPromise(position, delay)
+    for (let index = 1; index < amountValue; index++) {
+      createPromise(index, delay)
       .then(({ position, delay }) => {
         console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -50,15 +43,10 @@ class CallCreatePromise {
         console.log(`❌ Rejected promise ${position} in ${delay}ms`);
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`)
       });
-
-      if (position === amountValue) {     
-        clearTimeout(intervalId);
-      };
-
-    }, stepValue);
-
-};
-
+      
+      delay += stepValue;
+    }
+  };
 };
 
 const callCreatePromise = new CallCreatePromise;
