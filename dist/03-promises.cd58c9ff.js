@@ -535,7 +535,7 @@ class CallCreatePromise {
         const stepValue = Number(formEl.step.value);
         const amountValue = Number(formEl.amount.value);
         let delay1 = delayValue;
-        for(let index = 1; index < amountValue; index++){
+        for(let index = 1; index <= amountValue; index++){
             createPromise(index, delay1).then(({ position , delay  })=>{
                 console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
                 (0, _notiflixDefault.default).Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
